@@ -126,6 +126,7 @@ GET /api/banner/{PSEUDO_ID}
 
 To display the banner on a third-party website, client will include the following script tag:
 
+```
 <script>
   window.bannerConfig = {
     position: 'top',
@@ -133,8 +134,11 @@ To display the banner on a third-party website, client will include the followin
     height: '120px'
   };
 </script>
+```
 
+```
 <script async src="http://localhost:8080/banner.js/{PSEUDO_ID_PROVIDED}"></script>
+```
 
 This window.bannerConfig is optional,it is meant for customizing the banner position and size.
 
@@ -143,7 +147,3 @@ This window.bannerConfig is optional,it is meant for customizing the banner posi
 - Configure the production environment in `.env`
 - Use `php spark serve --host yourdomain.com` for local testing
 - Deploy using Apache/Nginx with proper routing to `public/index.php`
-
-```
-
-```
