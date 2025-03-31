@@ -103,7 +103,7 @@ The custom banner.js will automatically resolve the banner details from the prov
 The backend exposes a public API endpoint to retrieve banner details:
 
 ```
-GET /api/banner/{PSEUDO_ID}
+GET /api/banner/CLIENT_ID
 ```
 
 #### Example API Response:
@@ -137,10 +137,15 @@ To display the banner on a third-party website, client will include the followin
 ```
 
 ```
-<script async src="http://localhost:8080/banner.js/{PSEUDO_ID_PROVIDED}"></script>
+<script async src="http://localhost:8080/banner.js/{CLIENT_ID}"></script>
 ```
 
-This window.bannerConfig is optional,it is meant for customizing the banner position and size.
+- This window.bannerConfig object is optional,it is meant for customizing the banner positioning and size.
+
+- **Implementation Tips:**
+- Place this code just before the closing </body> tag.
+- For best performance, load asynchronously by adding async attribute
+- No refresh needed as the script will automatically fetch the updated banner in realtime
 
 ## 🌍 Deployment
 
