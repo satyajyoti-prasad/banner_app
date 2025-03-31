@@ -1,16 +1,7 @@
 # Banner App
 
-This is a simple project to display custom banners dynamically in third party web-app.
-
----
-
-## 📌 Banner Integration Task
-
-### 1️⃣ Objective
-
-The goal of this task is to develop an integration script that enables third-party websites to display a banner served by the host system.
-
----
+This is a simple project in PHP to display custom banners dynamically in third party web-app.
+The goal of this app is to develop an integration script that enables third-party websites to display a banner served by the host system.
 
 ## 🚀 Technology Stack
 
@@ -66,6 +57,7 @@ The goal of this task is to develop an integration script that enables third-par
 
 - Update database credentials in .env:
 
+  ```
   database.default.hostname = localhost
   database.default.database = your_database_name
   database.default.username = your_db_user
@@ -73,8 +65,8 @@ The goal of this task is to develop an integration script that enables third-par
   database.default.DBDriver = MySQLi
 
   ```
+
   **OR** you can directly modify `database.php` in `Config/Database.php` folder.
-  ```
 
 4️⃣ **Run Database Migrations**
 
@@ -90,7 +82,11 @@ The goal of this task is to develop an integration script that enables third-par
   php spark serve
 ```
 
-The application will be accessible at `http://localhost:8080`
+The application will be accessible at
+
+```
+http://localhost:8080
+```
 
 ## 📂 Admin Panel Features
 
@@ -115,7 +111,7 @@ GET /api/banner/{PSEUDO_ID}
 ```json
 {
   "image_url": "http://localhost:8080/assets/uploads/banners/1743403099_bf376cab008d8b02ea8e.png",
-  "link_url": "https://google.com",
+  "link_url": "https://banner-destination-domain.com",
   "alt_text": "Banner Alt Text",
   "width": "100%",
   "height": "auto",
@@ -142,17 +138,12 @@ To display the banner on a third-party website, client will include the followin
 
 This window.bannerConfig is optional,it is meant for customizing the banner position and size.
 
-```
-
-
-
 ## 🌍 Deployment
+
 - Configure the production environment in `.env`
 - Use `php spark serve --host yourdomain.com` for local testing
 - Deploy using Apache/Nginx with proper routing to `public/index.php`
 
----
-
-
+```
 
 ```
