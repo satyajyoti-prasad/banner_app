@@ -1,68 +1,158 @@
-# CodeIgniter 4 Application Starter
+# Banner App
 
-## What is CodeIgniter?
+This is a simple project to display custom banners dynamically in third party web-app.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+---
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## 📌 Banner Integration Task
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+### 1️⃣ Objective
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+The goal of this task is to develop an integration script that enables third-party websites to display a banner served by the host system.
 
-## Installation & updates
+---
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+## 🚀 Technology Stack
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+- **Backend:** CodeIgniter 4
+- **Database:** MySQL
+- **Frontend:** JavaScript (for embeddable script)
+- **Styling:** Tailwind CSS
 
-## Setup
+---
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## 📋 Functional Requirements
 
-## Important Change with index.php
+- The script should be embeddable in any third-party website using:
+  ```html
+  <script src="https://yourdomain.com/banner.js"></script>
+  ```
+- The script should fetch banner details (image URL, link, alt text) from the backend.
+- The script should dynamically insert the banner into the webpage.
+- The backend should provide banner details via a public API endpoint.
+- The script should allow optional parameters (e.g., width, height, position).
+- The banner should be clickable, leading to a provided URL.
+- An **Admin Panel** should be available where users can:
+  - Add customers.
+  - Assign respective banners to customers.
+  - Generate a **custom banner.js** endpoint for each customer.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+---
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## ⚙️ Setup Instructions
 
-**Please** read the user guide for a better explanation of how CI4 works!
+### Prerequisites
 
-## Repository Management
+- PHP 8.x
+- Composer installed
+- MySQL database setup
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+### Installation Steps
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+1️⃣ **Clone the Repository**
 
-## Server Requirements
+```sh
+  git clone https://github.com/satyajyoti-prasad/banner-app.git
+  cd banner-app
+```
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+2️⃣ **Install Dependencies**
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+```sh
+  composer install
+```
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+3️⃣ **Set Up Environment**
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+- Update database credentials in .env:
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+  database.default.hostname = localhost
+  database.default.database = your_database_name
+  database.default.username = your_db_user
+  database.default.password = your_db_password
+  database.default.DBDriver = MySQLi
+
+  ```
+  **OR** you can directly modify `database.php` in `Config/Database.php` folder.
+  ```
+
+4️⃣ **Run Database Migrations**
+
+```sh
+  php spark migrate
+```
+
+**OR** use the provided SQL file directly.
+
+5️⃣ **Start the Development Server**
+
+```sh
+  php spark serve
+```
+
+The application will be accessible at `http://localhost:8080`
+
+## 📂 Admin Panel Features
+
+- **Add Customers:** Register customers who will use the banner system.
+- **Manage Banners:** Upload and assign banners to specific customers.
+- **Generate Custom Banner.js URL:** Each customer gets a unique `banner.js` endpoint to embed in their websites.
+- **Dashboard:** View statistics on banner usage and performance.
+
+---
+
+## 🔗 API Endpoint for Banner Details
+
+The custom banner.js will automatically resolve the banner details from the provided API endpoint.
+The backend exposes a public API endpoint to retrieve banner details:
+
+```
+GET /api/banner/{PSEUDO_ID}
+```
+
+#### Example API Response:
+
+```json
+{
+  "image_url": "http://localhost:8080/assets/uploads/banners/1743403099_bf376cab008d8b02ea8e.png",
+  "link_url": "https://google.com",
+  "alt_text": "Banner Alt Text",
+  "width": "100%",
+  "height": "auto",
+  "position": "bottom",
+  "zIndex": "9999"
+}
+```
+
+---
+
+## 🎯 Embedding the Banner Script
+
+To display the banner on a third-party website, client will include the following script tag:
+
+<script>
+  window.bannerConfig = {
+    position: 'top',
+    width: '100%',
+    height: '120px'
+  };
+</script>
+
+<script async src="http://localhost:8080/banner.js/{PSEUDO_ID_PROVIDED}"></script>
+
+This window.bannerConfig is optional,it is meant for customizing the banner position and size.
+
+```
+
+
+
+## 🌍 Deployment
+- Configure the production environment in `.env`
+- Use `php spark serve --host yourdomain.com` for local testing
+- Deploy using Apache/Nginx with proper routing to `public/index.php`
+
+---
+
+
+
+```
