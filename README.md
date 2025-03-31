@@ -114,7 +114,7 @@ GET /api/banner/CLIENT_ID
   "link_url": "https://banner-destination-domain.com",
   "alt_text": "Banner Alt Text",
   "width": "100%",
-  "height": "auto",
+  "height": "120px",
   "position": "bottom",
   "zIndex": "9999"
 }
@@ -137,13 +137,13 @@ To display the banner on a third-party website, client will include the followin
 ```
 
 ```
-<script async src="http://localhost:8080/banner.js/{CLIENT_ID}"></script>
+<script async src="http://localhost:8080/banner.js/CLIENT_ID"></script>
 ```
 
 - This window.bannerConfig object is optional,it is meant for customizing the banner positioning and size.
 
 - **Implementation Tips:**
-- Place this code just before the closing </body> tag.
+- Place this code just before the closing body tag.
 - For best performance, load asynchronously by adding async attribute
 - No refresh needed as the script will automatically fetch the updated banner in realtime
 
